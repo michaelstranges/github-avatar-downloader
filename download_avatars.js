@@ -2,6 +2,7 @@ var myPass = require("./secrets.js")
 var myJson = {};
 
 var request = require("request");
+var fs = require("fs");
 
 function getRepoContributors(repoOwner, repoName, cb){
 
@@ -31,4 +32,12 @@ getRepoContributors("jquery", "jquery", function(err, result){
 });
 
 console.log("Welcome to the Github Avatar Downloader!");
+
+downloadImageByURL("https://avatars2.githubusercontent.com/u/2741?v=3&s=466", "avatars/kvirani.jpg")
+
+function downloadImageByURL(url, filepath){
+  request.get(url)
+    .pipe(fs.createWriteStream(filepath));
+    }
+
 
