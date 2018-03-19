@@ -4,6 +4,16 @@ var requestURL = process.argv.slice(2)
 var request = require("request");
 var fs = require("fs");
 
+//throws error if owner empty
+if(requestURL[0] === undefined){
+  throw new Error("Invalid repository owner");
+}
+
+//throws error if name empty
+if(requestURL[1] === undefined){
+  throw new Error("Invalid repository name");
+}
+
 function getRepoContributors(repoOwner, repoName, cb){
 
 var options = {
@@ -14,7 +24,7 @@ var options = {
     "Authorization" : myPass.GITHUB_TOKEN
   }
 };
-
+  //request uses options info to achieve connection to server
   request(options, function(err, res, body){
     cb(err,body);
   });
@@ -40,6 +50,7 @@ console.log("Welcome to the Github Avatar Downloader!");
 function downloadImageByURL(url, filepath){
   request.get(url)
     .pipe(fs.createWriteStream(filepath));
-    }
+  }
 
 
+console.log(requestURL[0])
