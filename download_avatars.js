@@ -1,6 +1,6 @@
 var myPass = require("./secrets.js")
 var myJson = {};
-
+var requestURL = process.argv.slice(2)
 var request = require("request");
 var fs = require("fs");
 
@@ -20,7 +20,7 @@ var options = {
   });
 }
 
-getRepoContributors("jquery", "jquery", function(err, result){
+getRepoContributors(requestURL[0], requestURL[1], function(err, result){
   //used Json to parse the results into an array of objects
   var myJson = JSON.parse(result);
    //looping through to pick out the avatar_urls
