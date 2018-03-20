@@ -1,16 +1,11 @@
 var myPass = require("./secrets.js")
-var myJson = {};
-var requestURL = process.argv.slice(2)
 var request = require("request");
 var fs = require("fs");
+var urlChecker = require("./urlCheck.js");
+var requestURL = process.argv.slice(2)
+var myJson = {};
 
-if(requestURL[0] === undefined){ //throws error if owner empty
-  throw new Error("Invalid repository owner");
-}
-
-if(requestURL[1] === undefined){ //throws error if name empty
-  throw new Error("Invalid repository name");
-}
+urlChecker.urlCheck(requestURL);
 
 function getRepoContributors(repoOwner, repoName, cb){
   var options = {
